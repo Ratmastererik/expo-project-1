@@ -1,8 +1,8 @@
 import * as Location from "expo-location";
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
-import Map from "../components/maps";
+import { StyleSheet, View } from "react-native";
+import Map from "../components/map";
 
 export default function App() {
   const [location, setLocation] = useState<Location.LocationObject>();
@@ -29,7 +29,6 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text>{location?.timestamp}</Text>
       <Map />
       <StatusBar style="auto" />
     </View>
@@ -40,7 +39,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
   },
 });
