@@ -1,11 +1,20 @@
+import * as Location from "expo-location";
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import MapView from "react-native-maps";
 
-export default function Map() {
+export default function Map(props: { location: Location.LocationObject }) {
   return (
     <View style={styles.container}>
-      <MapView style={styles.map} />
+      <MapView
+        style={styles.map}
+        initialRegion={{
+          latitude: props.location.coords.latitude,
+          longitude: props.location.coords.longitude,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+        }}
+      />
     </View>
   );
 }

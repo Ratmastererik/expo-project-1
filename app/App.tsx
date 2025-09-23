@@ -29,7 +29,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Map />
+      {location ? <Map location={location} /> : null}
       <StatusBar style="auto" />
     </View>
   );
