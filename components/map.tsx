@@ -7,6 +7,7 @@ export default function Map(props: { location: Location.LocationObject }) {
   return (
     <View style={styles.container}>
       <MapView
+        showsUserLocation
         style={styles.map}
         initialRegion={{
           latitude: props.location.coords.latitude,
