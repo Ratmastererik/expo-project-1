@@ -1,19 +1,24 @@
 import * as Location from "expo-location";
-import React from "react";
 import { StyleSheet, View } from "react-native";
 import MapView from "react-native-maps";
 
-export default function Map(props: { location: Location.LocationObject }) {
+interface MapProps {
+  location: Location.LocationObject;
+}
+
+export default function Map({ location }: MapProps) {
+  const { latitude, longitude } = location.coords;
+
   return (
     <View style={styles.container}>
       <MapView
         showsUserLocation
         style={styles.map}
         initialRegion={{
-          latitude: props.location.coords.latitude,
-          longitude: props.location.coords.longitude,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
+          latitude,
+          longitude,
+          latitudeDelta: 0.01,
+          longitudeDelta: 0.01,
         }}
       />
     </View>
