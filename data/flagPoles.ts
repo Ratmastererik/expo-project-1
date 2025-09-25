@@ -1,11 +1,11 @@
-export interface flagPole {
+export interface Flagpole {
   id: string;
   title: string;
   latitude: number;
   longtitude: number;
 }
 
-export const MockedFlagPoles: flagPole[] = [
+export const MockedFlagPoles: Flagpole[] = [
   {
     id: "1",
     title: "dsadadsad",
