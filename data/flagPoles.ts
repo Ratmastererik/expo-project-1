@@ -1,9 +1,15 @@
-import * as Location from "expo-location";
-
 export interface flagPole {
   id: string;
   name: string;
-  coord: Location.LocationObjectCoords;
+  latitud: string;
+  longtitud: string;
 }
 
-export const flagPoleData: flagPole[] = [];
+export const flagPoleData: flagPole[] = [
+  {
+    id: "1",
+    name: "dsadadsad",
+    latitud: "1000.12323",
+    longtitud: "1000.12323",
+  },
+];

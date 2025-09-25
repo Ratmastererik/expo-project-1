@@ -8,12 +8,24 @@ interface MapProps {
 
 export default function Map({ location }: MapProps) {
   const { latitude, longitude } = location.coords;
+  const mapStyle = [
+    {
+      featureType: "poi", // hide all points of interest
+      stylers: [{ visibility: "off" }],
+    },
+    {
+      featureType: "transit", // hide bus/train stations too
+      stylers: [{ visibility: "off" }],
+    },
+  ];
 
   return (
     <View style={styles.container}>
       <MapView
+        showsPointsOfInterest={false}
         showsUserLocation
         style={styles.map}
+        customMapStyle={mapStyle}
         initialRegion={{
           latitude,
           longitude,
