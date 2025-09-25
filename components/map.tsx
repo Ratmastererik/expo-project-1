@@ -1,6 +1,7 @@
 import * as Location from "expo-location";
 import { StyleSheet, View } from "react-native";
-import MapView from "react-native-maps";
+import MapView, { Marker } from "react-native-maps";
+import { MockedFlagPoles } from "../data/flagPoles";
 
 interface MapProps {
   location: Location.LocationObject;
@@ -32,7 +33,14 @@ export default function Map({ location }: MapProps) {
           latitudeDelta: 0.01,
           longitudeDelta: 0.01,
         }}
-      />
+      >
+        {MockedFlagPoles.map((flag) => (
+          <Marker
+            key={flag.id}
+            coordinate={{ latitude: flag.latitude, longitude: flag.longtitude }}
+          />
+        ))}
+      </MapView>
     </View>
   );
 }

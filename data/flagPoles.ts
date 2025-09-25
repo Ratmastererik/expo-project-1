@@ -1,15 +1,15 @@
 export interface flagPole {
   id: string;
-  name: string;
-  latitud: string;
-  longtitud: string;
+  title: string;
+  latitude: number;
+  longtitude: number;
 }
 
-export const flagPoleData: flagPole[] = [
+export const MockedFlagPoles: flagPole[] = [
   {
     id: "1",
-    name: "dsadadsad",
-    latitud: "1000.12323",
-    longtitud: "1000.12323",
+    title: "dsadadsad",
+    latitude: 57.721035,
+    longtitude: 12.939819,
   },
 ];
