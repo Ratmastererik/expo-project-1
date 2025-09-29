@@ -1,4 +1,5 @@
 import { useAudioPlayer } from "expo-audio";
+import { Image } from "expo-image";
 import * as Location from "expo-location";
 import { Button, StyleSheet, View } from "react-native";
 import MapView, { Marker } from "react-native-maps";
@@ -44,7 +45,12 @@ export default function Map({ location }: MapProps) {
           <Marker
             key={flag.id}
             coordinate={{ latitude: flag.latitude, longitude: flag.longitude }}
-          />
+          >
+            <Image
+              source={require("../assets/images/flagpole.png")}
+              style={{ width: 40, height: 40 }}
+            />
+          </Marker>
         ))}
       </MapView>
       <Button onPress={() => player.play()} title="Play sound" />
