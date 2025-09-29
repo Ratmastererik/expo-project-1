@@ -1,4 +1,4 @@
-import { Flagpole } from "./flagPoles";
+import { Flagpole } from "./flagpoles";
 
 interface user {
   id: string;
