@@ -13,7 +13,7 @@ export default function ProximitySound({
   userLocation,
   flagpoles,
 }: proximitySoundsProps) {
-  const player = useAudioPlayer(require("../assets/audio/cartoonslip.mp3"));
+  const player = useAudioPlayer(require("../assets/audio/erro.mp3"));
   const audioInterval = useRef<NodeJS.Timeout>(null);
 
   useEffect(() => {
