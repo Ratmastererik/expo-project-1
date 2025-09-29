@@ -2,35 +2,33 @@ import { useState } from "react";
 import { Button, Modal, StyleSheet, Text, TextInput, View } from "react-native";
 
 export default function FlagpoleReachedPopup() {
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
   const [message, setMessage] = useState("");
 
   return (
-    <View style={styles.container}>
-      <Modal
-        transparent
-        visible={visible}
-        onRequestClose={() => setVisible(false)}
-      >
-        <View style={styles.overlay}>
-          <View style={styles.popup}>
-            <Text style={styles.title}>Write Message</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Type here..."
-              value={message}
-              onChangeText={setMessage}
-            />
-            <Button
-              title="Submit"
-              onPress={() => {
-                setVisible(false);
-              }}
-            />
-          </View>
+    <Modal
+      transparent
+      visible={visible}
+      onRequestClose={() => setVisible(false)}
+    >
+      <View style={styles.overlay}>
+        <View style={styles.popup}>
+          <Text style={styles.title}>Write Message</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Type here..."
+            value={message}
+            onChangeText={setMessage}
+          />
+          <Button
+            title="Submit"
+            onPress={() => {
+              setVisible(false);
+            }}
+          />
         </View>
-      </Modal>
-    </View>
+      </View>
+    </Modal>
   );
 }
 

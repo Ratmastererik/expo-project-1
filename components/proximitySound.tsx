@@ -1,8 +1,9 @@
 import { useAudioPlayer } from "expo-audio";
 import * as Location from "expo-location";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Flagpole } from "../data/flagpoles";
 import { calcDistance } from "../utils/calcDistance";
+import FlagpoleReachedPopup from "./flagpoleReached";
 
 interface proximitySoundsProps {
   userLocation: Location.LocationObject;
@@ -15,6 +16,7 @@ export default function ProximitySound({
 }: proximitySoundsProps) {
   const player = useAudioPlayer(require("../assets/audio/erro.mp3"));
   const audioInterval = useRef<NodeJS.Timeout>(null);
+  const [distance, setDistance] = useState(0);
 
   useEffect(() => {
     player.play();
@@ -33,8 +35,6 @@ export default function ProximitySound({
       return;
     }
 
-    console.log("audio");
-
     const closest = flagpoles.reduce((prev, curr) => {
       const dPrev = calcDistance(
         userLocation.coords.latitude,
@@ -52,13 +52,14 @@ export default function ProximitySound({
       return dCurr < dPrev ? curr : prev;
     }, flagpoles[0]);
 
-    const distance = calcDistance(
+    const newDistance = calcDistance(
       userLocation.coords.latitude,
       userLocation.coords.longitude,
       closest.latitude,
       closest.longitude
     );
 
+    setDistance(newDistance);
     if (distance < 200) {
       const intervalSpeed = Math.max(100, distance * 5);
 
@@ -74,6 +75,10 @@ export default function ProximitySound({
       }, intervalSpeed);
     }
   }, [userLocation, flagpoles, player]);
+
+  if (distance < 20) {
+    return <FlagpoleReachedPopup />;
+  }
 
   return null;
 }
