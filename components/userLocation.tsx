@@ -2,7 +2,7 @@ import { Text, View } from "react-native";
 import useUserLocation from "../hooks/useUserLocationHook";
 import Map from "./map";
 
-export default function UserLocationMap() {
+export default function UserLocation() {
   const { location, errorMsg } = useUserLocation();
 
   if (errorMsg) {

@@ -1,7 +1,9 @@
+import { useAudioPlayer } from "expo-audio";
 import * as Location from "expo-location";
-import { StyleSheet, View } from "react-native";
+import { Button, StyleSheet, View } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import { MockedFlagPoles } from "../data/flagpoles";
+import useProximitySound from "../hooks/useProximitySound";
 
 interface MapProps {
   location: Location.LocationObject;
@@ -9,6 +11,8 @@ interface MapProps {
 
 export default function Map({ location }: MapProps) {
   const { latitude, longitude } = location.coords;
+  const player = useAudioPlayer(require("../assets/audio/cartoonslip.mp3"));
+
   const mapStyle = [
     {
       featureType: "poi", // hide all points of interest
@@ -19,6 +23,8 @@ export default function Map({ location }: MapProps) {
       stylers: [{ visibility: "off" }],
     },
   ];
+
+  useProximitySound(location, MockedFlagPoles);
 
   return (
     <View style={styles.container}>
@@ -41,6 +47,7 @@ export default function Map({ location }: MapProps) {
           />
         ))}
       </MapView>
+      <Button onPress={() => player.play()} title="Play sound" />
     </View>
   );
 }

@@ -4,19 +4,15 @@ import { useEffect, useRef } from "react";
 import { Flagpole } from "../data/flagpoles";
 import { calcDistance } from "../utils/calcDistance";
 
-interface proximitySoundsProps {
-  userLocation: Location.LocationObject;
-  flagpoles: Flagpole[];
-}
-
-export default function ProximitySound({
-  userLocation,
-  flagpoles,
-}: proximitySoundsProps) {
-  const player = useAudioPlayer("../assets/audio/caroonslip.mp3");
+export default function useProximitySound(
+  userLocation: Location.LocationObject,
+  flagpoles: Flagpole[]
+) {
+  const player = useAudioPlayer(require("../assets/audio/cartoonslip.mp3"));
   const audioInterval = useRef<NodeJS.Timeout>(null);
 
   useEffect(() => {
+    player.play();
     return () => {
       if (audioInterval.current) {
         clearInterval(audioInterval.current);
@@ -31,6 +27,8 @@ export default function ProximitySound({
       }
       return;
     }
+
+    console.log("audio");
 
     const closest = flagpoles.reduce((prev, curr) => {
       const dPrev = calcDistance(
@@ -57,7 +55,7 @@ export default function ProximitySound({
     );
 
     if (distance < 200) {
-      const intervalSpeed = Math.max(200, distance * 10);
+      const intervalSpeed = Math.max(100, distance * 5);
 
       audioInterval.current = setInterval(() => {
         try {
@@ -71,6 +69,4 @@ export default function ProximitySound({
       }, intervalSpeed);
     }
   }, [userLocation, flagpoles, player]);
-
-  return null;
 }

@@ -1,11 +1,11 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
-import UserLocationMap from "../components/userLocationMap";
+import UserLocation from "../components/userLocation";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <UserLocationMap />
+      <UserLocation />
       <StatusBar style="auto" />
     </View>
   );

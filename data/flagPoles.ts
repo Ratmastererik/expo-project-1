@@ -12,4 +12,10 @@ export const MockedFlagPoles: Flagpole[] = [
     latitude: 57.721035,
     longitude: 12.939819,
   },
+  {
+    id: "2",
+    title: "Eriks ställe",
+    latitude: 57.7810384,
+    longitude: 13.4071798,
+  },
 ];
