@@ -4,10 +4,15 @@ import { useEffect, useRef } from "react";
 import { Flagpole } from "../data/flagpoles";
 import { calcDistance } from "../utils/calcDistance";
 
-export default function useProximitySound(
-  userLocation: Location.LocationObject,
-  flagpoles: Flagpole[]
-) {
+interface proximitySoundsProps {
+  userLocation: Location.LocationObject;
+  flagpoles: Flagpole[];
+}
+
+export default function ProximitySound({
+  userLocation,
+  flagpoles,
+}: proximitySoundsProps) {
   const player = useAudioPlayer(require("../assets/audio/cartoonslip.mp3"));
   const audioInterval = useRef<NodeJS.Timeout>(null);
 
@@ -18,7 +23,7 @@ export default function useProximitySound(
         clearInterval(audioInterval.current);
       }
     };
-  }, []);
+  });
 
   useEffect(() => {
     if (!userLocation || flagpoles.length === 0) {
@@ -69,4 +74,6 @@ export default function useProximitySound(
       }, intervalSpeed);
     }
   }, [userLocation, flagpoles, player]);
+
+  return null;
 }
