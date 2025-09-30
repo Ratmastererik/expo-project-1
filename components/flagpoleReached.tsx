@@ -1,9 +1,23 @@
 import { useState } from "react";
 import { Button, Modal, StyleSheet, Text, TextInput, View } from "react-native";
 
-export default function FlagpoleReachedPopup() {
+interface Props {
+  flagpoleId: string;
+}
+
+type MessagesByFlagpole = Record<string, string[]>;
+
+export default function FlagpoleReachedPopup({ flagpoleId }: Props) {
   const [visible, setVisible] = useState(true);
-  const [message, setMessage] = useState("");
+  const [inputText, setInputText] = useState("");
+  const [messages, setMessages] = useState<MessagesByFlagpole>({});
+
+  function handleMessageSubmit(flagpoleId: string, message: string) {
+    setMessages((prev) => ({
+      ...prev,
+      [flagpoleId]: [...(prev[flagpoleId] ?? []), message],
+    }));
+  }
 
   return (
     <Modal
@@ -17,12 +31,13 @@ export default function FlagpoleReachedPopup() {
           <TextInput
             style={styles.input}
             placeholder="Type here..."
-            value={message}
-            onChangeText={setMessage}
+            value={inputText}
+            onChangeText={setInputText}
           />
           <Button
             title="Submit"
             onPress={() => {
+              handleMessageSubmit(flagpoleId, inputText);
               setVisible(false);
             }}
           />

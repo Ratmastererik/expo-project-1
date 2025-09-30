@@ -17,6 +17,7 @@ export default function ProximitySound({
   const player = useAudioPlayer(require("../assets/audio/erro.mp3"));
   const audioInterval = useRef<NodeJS.Timeout>(null);
   const [distance, setDistance] = useState(0);
+  const [closestFlagpole, setClosestFlagpole] = useState<Flagpole>();
 
   useEffect(() => {
     player.play();
@@ -59,6 +60,7 @@ export default function ProximitySound({
       closest.longitude
     );
 
+    setClosestFlagpole(closest);
     setDistance(newDistance);
     if (distance < 200) {
       const intervalSpeed = Math.max(100, distance * 5);
@@ -74,10 +76,15 @@ export default function ProximitySound({
         }
       }, intervalSpeed);
     }
-  }, [userLocation, flagpoles, player]);
+    if (distance < 20) {
+      if (audioInterval.current) {
+        clearInterval(audioInterval.current);
+      }
+    }
+  }, [userLocation, flagpoles, player, distance]);
 
   if (distance < 20) {
-    return <FlagpoleReachedPopup />;
+    return <FlagpoleReachedPopup flagpoleId={closestFlagpole!.id} />;
   }
 
   return null;

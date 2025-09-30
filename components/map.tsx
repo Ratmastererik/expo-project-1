@@ -2,7 +2,7 @@ import { Image } from "expo-image";
 import * as Location from "expo-location";
 import { StyleSheet, View } from "react-native";
 import MapView, { Marker } from "react-native-maps";
-import { MockedFlagPoles } from "../data/flagpoles";
+import { mockedFlagPoles } from "../data/flagpoles";
 import ProximitySound from "./proximitySound";
 
 interface MapProps {
@@ -37,7 +37,7 @@ export default function Map({ location }: MapProps) {
           longitudeDelta: 0.01,
         }}
       >
-        {MockedFlagPoles.map((flag) => (
+        {mockedFlagPoles.map((flag) => (
           <Marker
             key={flag.id}
             coordinate={{ latitude: flag.latitude, longitude: flag.longitude }}
@@ -49,7 +49,7 @@ export default function Map({ location }: MapProps) {
           </Marker>
         ))}
       </MapView>
-      <ProximitySound userLocation={location} flagpoles={MockedFlagPoles} />
+      <ProximitySound userLocation={location} flagpoles={mockedFlagPoles} />
     </View>
   );
 }
