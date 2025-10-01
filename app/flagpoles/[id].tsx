@@ -1,5 +1,5 @@
-import { useLocalSearchParams } from "expo-router";
-import { StyleSheet, Text, View } from "react-native";
+import { router, useLocalSearchParams } from "expo-router";
+import { Button, StyleSheet, Text, View } from "react-native";
 import FlagpoleReachedPopup from "../../components/flagpoleReached";
 
 export default function FlagpoleDetailsScreen() {
@@ -16,6 +16,7 @@ export default function FlagpoleDetailsScreen() {
   return (
     <View style={styles.container}>
       <FlagpoleReachedPopup flagpoleId={id} />
+      <Button title="Back to Map" onPress={() => router.back()} />
     </View>
   );
 }

@@ -1,6 +1,6 @@
 import { useAtomValue } from "jotai";
 import { useState } from "react";
-import { Button, Modal, StyleSheet, Text, TextInput, View } from "react-native";
+import { Button, StyleSheet, Text, TextInput, View } from "react-native";
 import { atomFlagpoles } from "../atoms";
 import { Flagpole } from "../data/flagpoles";
 
@@ -9,7 +9,6 @@ interface Props {
 }
 
 export default function FlagpoleReachedPopup({ flagpoleId }: Props) {
-  const [visible, setVisible] = useState(true);
   const [inputText, setInputText] = useState("");
   const [flagpoles, setFlagpoles] = useState<Flagpole[]>(
     useAtomValue(atomFlagpoles)
@@ -26,30 +25,23 @@ export default function FlagpoleReachedPopup({ flagpoleId }: Props) {
   }
 
   return (
-    <Modal
-      transparent
-      visible={visible}
-      onRequestClose={() => setVisible(false)}
-    >
-      <View style={styles.overlay}>
-        <View style={styles.popup}>
-          <Text style={styles.title}>Write Message</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Type here..."
-            value={inputText}
-            onChangeText={setInputText}
-          />
-          <Button
-            title="Submit"
-            onPress={() => {
-              handleMessageSubmit(flagpoleId, inputText);
-              setVisible(false);
-            }}
-          />
-        </View>
+    <View style={styles.overlay}>
+      <View style={styles.popup}>
+        <Text style={styles.title}>Write Message</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Type here..."
+          value={inputText}
+          onChangeText={setInputText}
+        />
+        <Button
+          title="Submit"
+          onPress={() => {
+            handleMessageSubmit(flagpoleId, inputText);
+          }}
+        />
       </View>
-    </Modal>
+    </View>
   );
 }
 

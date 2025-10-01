@@ -1,14 +1,15 @@
 import { Image } from "expo-image";
+import { useAtomValue } from "jotai";
 import { StyleSheet, Text, View } from "react-native";
 import MapView, { Marker } from "react-native-maps";
-import { mockedFlagPoles } from "../data/flagpoles";
-import useProximitySound from "../hooks/useProximitySound";
+import { atomFlagpoles } from "../atoms";
+import ProximitySound from "../hooks/useProximitySound";
 import useUserLocation from "../hooks/useUserLocationHook";
-// import ProximitySound from "./proximitySound";
 
 export default function Map() {
   const { location, errorMsg } = useUserLocation();
-  useProximitySound(location);
+  const flagpole = useAtomValue(atomFlagpoles);
+  ProximitySound(location);
 
   if (errorMsg) {
     return (
@@ -41,7 +42,7 @@ export default function Map() {
           longitudeDelta: 0.01,
         }}
       >
-        {mockedFlagPoles.map((flag) => (
+        {flagpole.map((flag) => (
           <Marker
             key={flag.id}
             coordinate={{ latitude: flag.latitude, longitude: flag.longitude }}

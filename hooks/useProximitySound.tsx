@@ -14,6 +14,7 @@ export default function useProximitySound(
   const audioInterval = useRef<NodeJS.Timeout>(null);
   const flagpoles = useAtomValue(atomFlagpoles);
   const [closestFlagpole, setClosestFlagpole] = useState<Flagpole>();
+  // const [lastNavigated, setLastNavigated] = useAtom(atomLastNavigatedFlagpole);
   const router = useRouter();
 
   useEffect(() => {
@@ -49,8 +50,23 @@ export default function useProximitySound(
     );
 
     setClosestFlagpole(closest);
+
+    if (distance < 20) {
+      if (audioInterval.current) {
+        clearInterval(audioInterval.current);
+      }
+      console.log("routing");
+      router.replace(`/flagpoles/${closest.id}`);
+      return;
+    }
+
     if (distance < 200) {
       const intervalSpeed = Math.max(100, distance * 5);
+
+      if (audioInterval.current) {
+        clearInterval(audioInterval.current);
+        audioInterval.current = null;
+      }
 
       audioInterval.current = setInterval(() => {
         try {
@@ -63,11 +79,12 @@ export default function useProximitySound(
         }
       }, intervalSpeed);
     }
-    if (distance < 20) {
-      router.navigate(`/flagpoles/${closest.id}`);
+
+    return () => {
       if (audioInterval.current) {
         clearInterval(audioInterval.current);
+        audioInterval.current = null;
       }
-    }
+    };
   }, [userLocation, flagpoles, player, router]);
 }

@@ -14,12 +14,18 @@ export default function useUserLocation() {
         return;
       }
 
-      Location.watchPositionAsync({}, (loc) => {
-        console.log(loc.coords.latitude);
-        console.log(loc.coords.longitude);
-        console.log(loc?.timestamp);
-        setLocation(loc);
-      });
+      Location.watchPositionAsync(
+        {
+          accuracy: Location.Accuracy.High,
+          distanceInterval: 5,
+          timeInterval: 5000,
+        },
+        (loc) => {
+          console.log(loc.coords.latitude);
+          console.log(loc.coords.longitude);
+          setLocation(loc);
+        }
+      );
     }
     getCurrentLocation();
   }, []);
