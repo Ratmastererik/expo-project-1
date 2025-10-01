@@ -1,9 +1,21 @@
+import { useLocalSearchParams } from "expo-router";
 import { StyleSheet, Text, View } from "react-native";
+import FlagpoleReachedPopup from "../../components/flagpoleReached";
 
-export default function App() {
+export default function FlagpoleDetailsScreen() {
+  const { id } = useLocalSearchParams<{ id?: string }>();
+
+  if (!id) {
+    return (
+      <View style={styles.container}>
+        <Text>No flagpole ID provided</Text>
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
-      {/* <FlagpoleReachedPopup /> */} <Text>dsa</Text>
+      <FlagpoleReachedPopup flagpoleId={id} />
     </View>
   );
 }
