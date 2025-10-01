@@ -1,12 +1,9 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View } from "react-native";
-import Map from "../../components/map";
+import { StyleSheet, Text, View } from "react-native";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Map />
-      <StatusBar style="auto" />
+      <Text>dsadsad</Text>
     </View>
   );
 }
