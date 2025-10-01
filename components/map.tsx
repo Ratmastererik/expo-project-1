@@ -1,27 +1,30 @@
 import { Image } from "expo-image";
-import * as Location from "expo-location";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import { mockedFlagPoles } from "../data/flagpoles";
+import useUserLocation from "../hooks/useUserLocationHook";
 import ProximitySound from "./proximitySound";
 
-interface MapProps {
-  location: Location.LocationObject;
-}
+export default function Map() {
+  const { location, errorMsg } = useUserLocation();
 
-export default function Map({ location }: MapProps) {
+  if (errorMsg) {
+    return (
+      <View>
+        <Text>{errorMsg}</Text>
+      </View>
+    );
+  }
+
+  if (!location) {
+    // Location hasn't loaded yet
+    return (
+      <View>
+        <Text>Fetching location...</Text>
+      </View>
+    );
+  }
   const { latitude, longitude } = location.coords;
-
-  const mapStyle = [
-    {
-      featureType: "poi", // hide all points of interest
-      stylers: [{ visibility: "off" }],
-    },
-    {
-      featureType: "transit", // hide bus/train stations too
-      stylers: [{ visibility: "off" }],
-    },
-  ];
 
   return (
     <View style={styles.container}>
@@ -63,3 +66,14 @@ const styles = StyleSheet.create({
     height: "100%",
   },
 });
+
+const mapStyle = [
+  {
+    featureType: "poi", // hide all points of interest
+    stylers: [{ visibility: "off" }],
+  },
+  {
+    featureType: "transit", // hide bus/train stations too
+    stylers: [{ visibility: "off" }],
+  },
+];
