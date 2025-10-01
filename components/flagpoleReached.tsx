@@ -1,6 +1,8 @@
+import { useAtomValue } from "jotai";
 import { useState } from "react";
 import { Button, Modal, StyleSheet, Text, TextInput, View } from "react-native";
-import { Flagpole, mockedFlagPoles } from "../data/flagpoles";
+import { atomFlagpoles } from "../atoms";
+import { Flagpole } from "../data/flagpoles";
 
 interface Props {
   flagpoleId: string;
@@ -9,7 +11,9 @@ interface Props {
 export default function FlagpoleReachedPopup({ flagpoleId }: Props) {
   const [visible, setVisible] = useState(true);
   const [inputText, setInputText] = useState("");
-  const [flagpoles, setFlagpoles] = useState<Flagpole[]>(mockedFlagPoles);
+  const [flagpoles, setFlagpoles] = useState<Flagpole[]>(
+    useAtomValue(atomFlagpoles)
+  );
 
   function handleMessageSubmit(flagpoleId: string, inputText: string) {
     setFlagpoles((prev) =>
