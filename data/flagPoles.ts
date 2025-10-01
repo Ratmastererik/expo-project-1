@@ -3,7 +3,7 @@ export interface Flagpole {
   title: string;
   latitude: number;
   longitude: number;
-  messages: Text[];
+  messages: string[];
 }
 
 export const mockedFlagPoles: Flagpole[] = [
@@ -26,6 +26,13 @@ export const mockedFlagPoles: Flagpole[] = [
     title: "Skolan",
     latitude: 57.7168835,
     longitude: 12.9418385,
-    messages: [],
+    messages: ["sdsss", "dsadad", "ddadsafag"],
+  },
+  {
+    id: "4",
+    title: "vid kaffet vid skolan",
+    latitude: 57.7169625,
+    longitude: 12.9424782,
+    messages: ["sdsss", "dsadad", "ddadsafag"],
   },
 ];

@@ -76,14 +76,14 @@ export default function ProximitySound({
         }
       }, intervalSpeed);
     }
-    if (distance < 20) {
+    if (newDistance < 20) {
       if (audioInterval.current) {
         clearInterval(audioInterval.current);
       }
     }
   }, [userLocation, flagpoles, player, distance]);
 
-  if (distance < 20) {
+  if (closestFlagpole && distance < 20) {
     return <FlagpoleReachedPopup flagpoleId={closestFlagpole!.id} />;
   }
 

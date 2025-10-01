@@ -1,22 +1,24 @@
 import { useState } from "react";
 import { Button, Modal, StyleSheet, Text, TextInput, View } from "react-native";
+import { Flagpole, mockedFlagPoles } from "../data/flagpoles";
 
 interface Props {
   flagpoleId: string;
 }
 
-type MessagesByFlagpole = Record<string, string[]>;
-
 export default function FlagpoleReachedPopup({ flagpoleId }: Props) {
   const [visible, setVisible] = useState(true);
   const [inputText, setInputText] = useState("");
-  const [messages, setMessages] = useState<MessagesByFlagpole>({});
+  const [flagpoles, setFlagpoles] = useState<Flagpole[]>(mockedFlagPoles);
 
-  function handleMessageSubmit(flagpoleId: string, message: string) {
-    setMessages((prev) => ({
-      ...prev,
-      [flagpoleId]: [...(prev[flagpoleId] ?? []), message],
-    }));
+  function handleMessageSubmit(flagpoleId: string, inputText: string) {
+    setFlagpoles((prev) =>
+      prev.map((flag) =>
+        flag.id === flagpoleId
+          ? { ...flag, messages: [...flag.messages, inputText] }
+          : flag
+      )
+    );
   }
 
   return (
