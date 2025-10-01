@@ -2,11 +2,13 @@ import { Image } from "expo-image";
 import { StyleSheet, Text, View } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import { mockedFlagPoles } from "../data/flagpoles";
+import useProximitySound from "../hooks/useProximitySound";
 import useUserLocation from "../hooks/useUserLocationHook";
-import ProximitySound from "./proximitySound";
+// import ProximitySound from "./proximitySound";
 
 export default function Map() {
   const { location, errorMsg } = useUserLocation();
+  useProximitySound(location);
 
   if (errorMsg) {
     return (
@@ -51,7 +53,6 @@ export default function Map() {
           </Marker>
         ))}
       </MapView>
-      <ProximitySound userLocation={location} flagpoles={mockedFlagPoles} />
     </View>
   );
 }
@@ -68,11 +69,11 @@ const styles = StyleSheet.create({
 
 const mapStyle = [
   {
-    featureType: "poi", // hide all points of interest
+    featureType: "poi",
     stylers: [{ visibility: "off" }],
   },
   {
-    featureType: "transit", // hide bus/train stations too
+    featureType: "transit",
     stylers: [{ visibility: "off" }],
   },
 ];

@@ -5,6 +5,7 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
+    "scheme": "expoproject1",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
@@ -47,7 +48,8 @@
         {
           "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone."
         }
-      ]
+      ],
+      "expo-router"
     ],
     "extra": {
       "eas": {
