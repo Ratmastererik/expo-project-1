@@ -28,11 +28,11 @@ export const mockedFlagPoles: Flagpole[] = [
     longitude: 12.9418385,
     messages: ["sdsss", "dsadad", "ddadsafag"],
   },
-  // {
-  //   id: "4",
-  //   title: "vid kaffet vid skolan",
-  //   latitude: 57.7169625,
-  //   longitude: 12.9424782,
-  //   messages: ["sdsss", "dsadad", "ddadsafag"],
-  // },
+  {
+    id: "4",
+    title: "vid kaffet vid skolan",
+    latitude: 57.7169625,
+    longitude: 12.9424782,
+    messages: ["sdsss", "dsadad", "ddadsafag"],
+  },
 ];

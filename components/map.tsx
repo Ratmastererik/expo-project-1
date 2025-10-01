@@ -17,7 +17,6 @@ export default function Map() {
   }
 
   if (!location) {
-    // Location hasn't loaded yet
     return (
       <View>
         <Text>Fetching location...</Text>
