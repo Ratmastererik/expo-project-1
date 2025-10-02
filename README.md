@@ -76,10 +76,28 @@ Följ instruktionerna i terminalen för att öppna appen i en emulator eller på
 - `npm run ios` – Startar på iOS-simulator
 - `npm run web` – Startar i webbläsare
 
-## 🧑‍💻 Utveckling
+## Krav för godkänt
 
-Koden är skriven i TypeScript och följer moderna React Native-principer. Pull requests och förbättringsförslag välkomnas!
+[x] Projektet använder minst 4 stycken RN-komponenter och minst 4 stycken Expo
+komponenter.
 
-## 📄 Licens
+[x] De utvalda komponenterna MÅSTE antecknas i README filen tillsammans med en
+lista över genomförda krav.
 
-MIT
+[x] React Navigation används för att skapa en bättre upplevelse i appen.
+
+[x] Git & GitHub har använts.
+
+[x] Projektmappen innehåller en README.md fil.
+
+[x] Uppgiften lämnas in i tid!
+
+[x] Muntlig presentation är genomförd
+
+## Krav för väl godkänt
+
+[x] Alla punkter för godkänt är uppfyllda
+
+[x] Ytterligare en valfri extern modul används i projektet (jotai).
+
+[] Appen ska prata med ett Web-API för att hämta data.
