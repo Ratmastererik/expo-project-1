@@ -8,7 +8,7 @@ interface Props {
   flagpoleId: string;
 }
 
-export default function FlagpoleReachedPopup({ flagpoleId }: Props) {
+export default function FlagpolMenu({ flagpoleId }: Props) {
   const [inputText, setInputText] = useState("");
   const [flagpoles, setFlagpoles] = useState<Flagpole[]>(
     useAtomValue(atomFlagpoles)
@@ -22,6 +22,8 @@ export default function FlagpoleReachedPopup({ flagpoleId }: Props) {
           : flag
       )
     );
+
+    console.log(flagpoles.map((f) => f.messages));
   }
 
   return (

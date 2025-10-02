@@ -13,12 +13,13 @@ export default function useProximitySound(
   const player = useAudioPlayer(require("../assets/audio/erro.mp3"));
   const audioInterval = useRef<NodeJS.Timeout>(null);
   const flagpoles = useAtomValue(atomFlagpoles);
+  const [isActive, setIsActive] = useState(true);
   const [closestFlagpole, setClosestFlagpole] = useState<Flagpole>();
   // const [lastNavigated, setLastNavigated] = useAtom(atomLastNavigatedFlagpole);
   const router = useRouter();
 
   useEffect(() => {
-    if (!userLocation || flagpoles.length === 0) {
+    if (isActive || !userLocation || flagpoles.length === 0) {
       if (audioInterval.current) {
         clearInterval(audioInterval.current);
       }
@@ -55,7 +56,7 @@ export default function useProximitySound(
       if (audioInterval.current) {
         clearInterval(audioInterval.current);
       }
-      console.log("routing");
+      setIsActive(false);
       router.replace(`/flagpoles/${closest.id}`);
       return;
     }
@@ -86,5 +87,5 @@ export default function useProximitySound(
         audioInterval.current = null;
       }
     };
-  }, [userLocation, flagpoles, player, router]);
+  }, [userLocation, flagpoles, player, router, isActive]);
 }
