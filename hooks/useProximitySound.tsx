@@ -2,9 +2,8 @@ import { useAudioPlayer } from "expo-audio";
 import * as Location from "expo-location";
 import { useRouter } from "expo-router";
 import { useAtomValue } from "jotai";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { atomFlagpoles } from "../atoms";
-import { Flagpole } from "../data/flagpoles";
 import { calcDistance } from "../utils/calcDistance";
 
 export default function useProximitySound(
@@ -13,13 +12,12 @@ export default function useProximitySound(
   const player = useAudioPlayer(require("../assets/audio/erro.mp3"));
   const audioInterval = useRef<NodeJS.Timeout>(null);
   const flagpoles = useAtomValue(atomFlagpoles);
-  const [isActive, setIsActive] = useState(true);
-  const [closestFlagpole, setClosestFlagpole] = useState<Flagpole>();
-  // const [lastNavigated, setLastNavigated] = useAtom(atomLastNavigatedFlagpole);
+  const hasNavigated = useRef(false);
+  const lastClosestId = useRef<string | null>(null);
   const router = useRouter();
 
   useEffect(() => {
-    if (isActive || !userLocation || flagpoles.length === 0) {
+    if (!userLocation || flagpoles.length === 0) {
       if (audioInterval.current) {
         clearInterval(audioInterval.current);
       }
@@ -50,13 +48,18 @@ export default function useProximitySound(
       closest.longitude
     );
 
-    setClosestFlagpole(closest);
+    console.log(distance);
 
-    if (distance < 20) {
+    if (lastClosestId.current !== closest.id) {
+      lastClosestId.current = closest.id;
+    }
+
+    if (distance < 20 && !hasNavigated.current) {
+      hasNavigated.current = true;
       if (audioInterval.current) {
         clearInterval(audioInterval.current);
       }
-      setIsActive(false);
+      // setIsActive(false);
       router.replace(`/flagpoles/${closest.id}`);
       return;
     }
@@ -87,5 +90,5 @@ export default function useProximitySound(
         audioInterval.current = null;
       }
     };
-  }, [userLocation, flagpoles, player, router, isActive]);
+  }, [userLocation, flagpoles]);
 }
