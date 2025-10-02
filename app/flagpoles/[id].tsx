@@ -1,8 +1,8 @@
 import { router, useLocalSearchParams } from "expo-router";
 import React from "react";
 import { Button, StyleSheet, Text, View } from "react-native";
-import FlagpolMenu from "../../components/flagpoleMenu";
 import MessagesList from "../../components/messagesList";
+import SubmitMessageForm from "../../components/submitMessageForm";
 
 export default function FlagpoleDetailsScreen() {
   const { id } = useLocalSearchParams<{ id?: string }>();
@@ -17,8 +17,8 @@ export default function FlagpoleDetailsScreen() {
 
   return (
     <View style={styles.container}>
-      {MessagesList(id)}
-      <FlagpolMenu flagpoleId={id} />
+      <MessagesList flagpoleId={id} />
+      <SubmitMessageForm flagpoleId={id} />
       <Button title="Back to Map" onPress={() => router.navigate("/")} />
     </View>
   );
