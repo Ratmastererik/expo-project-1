@@ -18,8 +18,6 @@ En mobilapplikation byggd med **Expo** och **React Native** där användaren kan
 - **expo-image** – Bildhantering
 - **Jotai** – Tillståndshantering
 
-## 🚀 Kom igång
-
 ### Förutsättningar
 
 - Node.js & npm
@@ -42,13 +40,7 @@ En mobilapplikation byggd med **Expo** och **React Native** där användaren kan
 Kör följande kommando för att starta utvecklingsservern:
 
 ```bash
-npm start
-```
-
-eller
-
-```bash
-expo start
+npm expo start
 ```
 
 Följ instruktionerna i terminalen för att öppna appen i en emulator eller på din mobil med Expo Go.
